@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/greet")
 public class GreetingController {
 
-    @GetMapping("")
-    public ResponseEntity<Greeting> getGreeting(){
-        return new ResponseEntity<>(GreetingService.getDefaultGreeting(), HttpStatus.OK);
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<Greeting> getGreeting(@RequestParam(value = "firstName", required = false, defaultValue = "") String firstName,@RequestParam(value = "lastName", required = false, defaultValue = "") String lastName){
+        return new ResponseEntity<>(GreetingService.getCustomGreeting(firstName, lastName), HttpStatus.OK);
     }
 
     @PostMapping("")
