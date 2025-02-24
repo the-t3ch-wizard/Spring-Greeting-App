@@ -38,12 +38,12 @@ public class GreetingController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Greeting> updateGreeting(@PathVariable String id, @RequestBody Greeting newGreeting){
-        return new ResponseEntity<>(greetingService.updateGreeting(Long.parseLong(id), newGreeting), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(greetingService.updateGreeting(Long.parseLong(id), newGreeting), HttpStatus.OK);
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<Greeting> deleteGreeting(){
-        return new ResponseEntity<>(new Greeting("Greeting using delete method By Ayush"), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable String id){
+        return new ResponseEntity<>(greetingService.deleteGreeting(Long.parseLong(id)), HttpStatus.OK);
     }
 
 }

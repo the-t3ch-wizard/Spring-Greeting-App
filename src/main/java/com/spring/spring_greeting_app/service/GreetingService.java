@@ -43,4 +43,9 @@ public class GreetingService {
             return greetingRepository.save(greeting);
         }).orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
     }
+
+    public String deleteGreeting(Long id) {
+        greetingRepository.deleteById(id);
+        return "Deleted successfully";
+    }
 }
