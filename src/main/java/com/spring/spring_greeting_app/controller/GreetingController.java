@@ -23,7 +23,7 @@ public class GreetingController {
 
     @PostMapping("")
     public ResponseEntity<Greeting> addGreeting(@RequestBody Greeting greeting){
-        return new ResponseEntity<>(greetingService.saveGreeting(greeting), HttpStatus.OK);
+        return new ResponseEntity<>(greetingService.saveGreeting(greeting), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -34,6 +34,11 @@ public class GreetingController {
     @GetMapping("/all")
     public ResponseEntity<List<Greeting>> getAllGreetings(){
         return new ResponseEntity<>(greetingService.getAllGreetings(), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Greeting> updateGreeting(@PathVariable String id, @RequestBody Greeting newGreeting){
+        return new ResponseEntity<>(greetingService.updateGreeting(Long.parseLong(id), newGreeting), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("")
