@@ -5,6 +5,7 @@ import com.spring.spring_greeting_app.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,9 @@ public class GreetingService {
         Optional<Greeting> existingGreeting = greetingRepository.findById(id);
         if (existingGreeting.isPresent()) return existingGreeting.get();
         return new Greeting();
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }

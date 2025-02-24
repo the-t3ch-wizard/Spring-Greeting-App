@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/greet")
 public class GreetingController {
@@ -20,14 +22,18 @@ public class GreetingController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Greeting> postGreeting(@RequestBody Greeting greeting){
+    public ResponseEntity<Greeting> addGreeting(@RequestBody Greeting greeting){
         return new ResponseEntity<>(greetingService.saveGreeting(greeting), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Greeting> getGreetingById(@PathVariable String id){
-        System.out.println("TEST : "+id);
         return new ResponseEntity<>(greetingService.getGreetingById(Long.parseLong(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Greeting>> getAllGreetings(){
+        return new ResponseEntity<>(greetingService.getAllGreetings(), HttpStatus.OK);
     }
 
     @DeleteMapping("")
