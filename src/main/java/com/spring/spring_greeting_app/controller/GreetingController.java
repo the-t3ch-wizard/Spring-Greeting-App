@@ -24,9 +24,10 @@ public class GreetingController {
         return new ResponseEntity<>(greetingService.saveGreeting(greeting), HttpStatus.OK);
     }
 
-    @PutMapping("")
-    public ResponseEntity<Greeting> putGreeting(){
-        return new ResponseEntity<>(new Greeting("Greeting using put method By Ayush"), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Greeting> getGreetingById(@PathVariable String id){
+        System.out.println("TEST : "+id);
+        return new ResponseEntity<>(greetingService.getGreetingById(Long.parseLong(id)), HttpStatus.OK);
     }
 
     @DeleteMapping("")
