@@ -2,6 +2,7 @@ package com.spring.spring_greeting_app.controller;
 
 import com.spring.spring_greeting_app.model.Greeting;
 import com.spring.spring_greeting_app.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/greet")
 public class GreetingController {
 
+    @Autowired
+    GreetingService greetingService;
+
     @GetMapping(value = {"", "/"})
     public ResponseEntity<Greeting> getGreeting(@RequestParam(value = "firstName", required = false, defaultValue = "") String firstName,@RequestParam(value = "lastName", required = false, defaultValue = "") String lastName){
-        return new ResponseEntity<>(GreetingService.getCustomGreeting(firstName, lastName), HttpStatus.OK);
+        return new ResponseEntity<>(greetingService.getCustomGreeting(firstName, lastName), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Greeting> postGreeting(){
-        return new ResponseEntity<>(new Greeting("Greeting using post method By Ayush"), HttpStatus.OK);
+    public ResponseEntity<Greeting> postGreeting(@RequestBody Greeting greeting){
+        return new ResponseEntity<>(greetingService.saveGreeting(greeting), HttpStatus.OK);
     }
 
     @PutMapping("")
